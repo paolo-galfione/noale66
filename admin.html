@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Classe 1966 Noale</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== LOGIN ===== -->
+  <div class="admin-login" id="loginSection">
+    <div class="admin-login__box">
+      <h1>Classe '66 — Admin</h1>
+      <div class="form__group">
+        <label class="form__label" for="adminPassword">Password</label>
+        <input class="form__input" type="password" id="adminPassword" placeholder="Inserisci la password">
+      </div>
+      <button class="btn btn--primary" style="width:100%; margin-top:12px;" id="loginBtn">Accedi</button>
+      <div class="form__message" id="loginMessage"></div>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD ===== -->
+  <div class="admin-dashboard container" id="dashboardSection" style="display:none;">
+    <h1 class="section-title" style="margin-bottom:32px;">Dashboard Iscrizioni</h1>
+
+    <!-- Statistiche -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-card__number" id="statTotale">-</div>
+        <div class="stat-card__label">Iscritti totali</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statAccompagnatori">-</div>
+        <div class="stat-card__label">Gradirebbero accomp.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statGiugno">-</div>
+        <div class="stat-card__label">Preferiscono giugno</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statSettembre">-</div>
+        <div class="stat-card__label">Preferiscono settembre</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__number" id="statEntrambe">-</div>
+        <div class="stat-card__label">Entrambe le date</div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="admin-toolbar">
+      <div>
+        <button class="btn btn--outline" id="refreshBtn">Aggiorna dati</button>
+        <button class="btn btn--outline" id="exportCsvBtn">Esporta CSV</button>
+      </div>
+      <button class="btn btn--outline" id="logoutBtn" style="border-color:var(--color-text-light); color:var(--color-text-light);">Esci</button>
+    </div>
+
+    <!-- Tabella -->
+    <div class="table-wrapper">
+      <table class="admin-table" id="registrationsTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data iscrizione</th>
+            <th>Nome</th>
+            <th>Telefono</th>
+            <th>27 Giu</th>
+            <th>12 Set</th>
+            <th>Accomp.</th>
+            <th>Note</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="9" style="text-align:center; padding:24px;">Caricamento...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
