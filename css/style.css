@@ -339,6 +339,18 @@ section > .container {
   color: var(--color-text-light);
 }
 
+.dettagli__map-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .2s, text-shadow .2s;
+}
+
+.dettagli__map-link:hover {
+  color: #fff;
+  text-shadow: var(--glow-cyan);
+}
+
 /* ======================
    ISCRIZIONE (Form)
    ====================== */
