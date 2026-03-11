@@ -117,26 +117,25 @@ async function adminPost(payload) {
 function renderStats(data) {
   const totale = data.length;
   let accompagnatori = 0;
-  let giugno = 0;
-  let settembre = 0;
-  let entrambe = 0;
+  let sab6 = 0;
+  let dom7 = 0;
+  let sab20 = 0;
+  let dom21 = 0;
 
   data.forEach(row => {
-    if (isSi(row['Accompagnatore'])) {
-      accompagnatori++;
-    }
-    const isGiugno = isSi(row['Disp. Giugno']);
-    const isSettembre = isSi(row['Disp. Settembre']);
-    if (isGiugno) giugno++;
-    if (isSettembre) settembre++;
-    if (isGiugno && isSettembre) entrambe++;
+    if (isSi(row['Accompagnatore'])) accompagnatori++;
+    if (isSi(row['SAB-6'])) sab6++;
+    if (isSi(row['DOM-7'])) dom7++;
+    if (isSi(row['SAB-20'])) sab20++;
+    if (isSi(row['DOM-21'])) dom21++;
   });
 
   document.getElementById('statTotale').textContent = totale;
   document.getElementById('statAccompagnatori').textContent = accompagnatori;
-  document.getElementById('statGiugno').textContent = giugno;
-  document.getElementById('statSettembre').textContent = settembre;
-  document.getElementById('statEntrambe').textContent = entrambe;
+  document.getElementById('statSab6').textContent = sab6;
+  document.getElementById('statDom7').textContent = dom7;
+  document.getElementById('statSab20').textContent = sab20;
+  document.getElementById('statDom21').textContent = dom21;
 }
 
 /* --- Tabella --- */
@@ -144,7 +143,7 @@ function renderTable(data) {
   const tbody = document.getElementById('tableBody');
 
   if (!data.length) {
-    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:24px;">Nessuna iscrizione trovata.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; padding:24px;">Nessuna iscrizione trovata.</td></tr>';
     return;
   }
 
@@ -157,8 +156,10 @@ function renderTable(data) {
       <td>${escapeHtml(String(row['Timestamp'] || ''))}</td>
       <td>${nome}</td>
       <td>${escapeHtml(String(row['Telefono'] || ''))}</td>
-      <td>${isSi(row['Disp. Giugno']) ? 'Sì' : 'No'}</td>
-      <td>${isSi(row['Disp. Settembre']) ? 'Sì' : 'No'}</td>
+      <td>${isSi(row['SAB-6']) ? 'Sì' : 'No'}</td>
+      <td>${isSi(row['DOM-7']) ? 'Sì' : 'No'}</td>
+      <td>${isSi(row['SAB-20']) ? 'Sì' : 'No'}</td>
+      <td>${isSi(row['DOM-21']) ? 'Sì' : 'No'}</td>
       <td>${isSi(row['Accompagnatore']) ? 'Sì' : 'No'}</td>
       <td>${escapeHtml(String(row['Note'] || ''))}</td>
       <td class="admin-actions">
@@ -205,17 +206,31 @@ function editRow(sheetRow, dataIndex) {
         <input class="form__input" type="tel" id="editTelefono" value="${escapeAttr(String(row['Telefono'] || ''))}">
       </div>
       <div class="form__group">
-        <label class="form__label">27 Giugno</label>
-        <select class="form__input" id="editGiugno">
-          <option value="Sì" ${isSi(row['Disp. Giugno']) ? 'selected' : ''}>Sì</option>
-          <option value="No" ${!isSi(row['Disp. Giugno']) ? 'selected' : ''}>No</option>
+        <label class="form__label">SAB 6 giugno</label>
+        <select class="form__input" id="editSab6">
+          <option value="Sì" ${isSi(row['SAB-6']) ? 'selected' : ''}>Sì</option>
+          <option value="No" ${!isSi(row['SAB-6']) ? 'selected' : ''}>No</option>
         </select>
       </div>
       <div class="form__group">
-        <label class="form__label">12 Settembre</label>
-        <select class="form__input" id="editSettembre">
-          <option value="Sì" ${isSi(row['Disp. Settembre']) ? 'selected' : ''}>Sì</option>
-          <option value="No" ${!isSi(row['Disp. Settembre']) ? 'selected' : ''}>No</option>
+        <label class="form__label">DOM 7 giugno</label>
+        <select class="form__input" id="editDom7">
+          <option value="Sì" ${isSi(row['DOM-7']) ? 'selected' : ''}>Sì</option>
+          <option value="No" ${!isSi(row['DOM-7']) ? 'selected' : ''}>No</option>
+        </select>
+      </div>
+      <div class="form__group">
+        <label class="form__label">SAB 20 giugno</label>
+        <select class="form__input" id="editSab20">
+          <option value="Sì" ${isSi(row['SAB-20']) ? 'selected' : ''}>Sì</option>
+          <option value="No" ${!isSi(row['SAB-20']) ? 'selected' : ''}>No</option>
+        </select>
+      </div>
+      <div class="form__group">
+        <label class="form__label">DOM 21 giugno</label>
+        <select class="form__input" id="editDom21">
+          <option value="Sì" ${isSi(row['DOM-21']) ? 'selected' : ''}>Sì</option>
+          <option value="No" ${!isSi(row['DOM-21']) ? 'selected' : ''}>No</option>
         </select>
       </div>
       <div class="form__group">
@@ -249,8 +264,10 @@ function editRow(sheetRow, dataIndex) {
     const fields = {
       'Nome': document.getElementById('editNome').value.trim(),
       'Telefono': document.getElementById('editTelefono').value.trim(),
-      'Disp. Giugno': document.getElementById('editGiugno').value,
-      'Disp. Settembre': document.getElementById('editSettembre').value,
+      'SAB-6': document.getElementById('editSab6').value,
+      'DOM-7': document.getElementById('editDom7').value,
+      'SAB-20': document.getElementById('editSab20').value,
+      'DOM-21': document.getElementById('editDom21').value,
       'Accompagnatore': document.getElementById('editAccompagnatore').value,
       'Note': document.getElementById('editNote').value.trim()
     };
@@ -284,7 +301,7 @@ function initExportCsv() {
   document.getElementById('exportCsvBtn')?.addEventListener('click', () => {
     if (!currentData.length) return;
 
-    const headers = ['Timestamp', 'Nome', 'Telefono', 'Disp. Giugno', 'Disp. Settembre', 'Accompagnatore', 'Note'];
+    const headers = ['Timestamp', 'Nome', 'Telefono', 'SAB-6', 'DOM-7', 'SAB-20', 'DOM-21', 'Accompagnatore', 'Note'];
     const csvRows = [headers.join(';')];
 
     currentData.forEach(row => {

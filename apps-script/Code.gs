@@ -29,12 +29,12 @@ function setup() {
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
   }
-  sheet.getRange(1, 1, 1, 7).setValues([[
-    'Timestamp', 'Nome', 'Telefono', 'Disp. Giugno',
-    'Disp. Settembre', 'Accompagnatore', 'Note'
+  sheet.getRange(1, 1, 1, 9).setValues([[
+    'Timestamp', 'Nome', 'Telefono', 'SAB-6',
+    'DOM-7', 'SAB-20', 'DOM-21', 'Accompagnatore', 'Note'
   ]]);
   sheet.setFrozenRows(1);
-  sheet.getRange(1, 1, 1, 7).setFontWeight('bold');
+  sheet.getRange(1, 1, 1, 9).setFontWeight('bold');
 }
 
 /**
@@ -58,8 +58,10 @@ function doPost(e) {
         new Date().toLocaleString('it-IT'),
         data.nome || '',
         data.telefono || '',
-        data.giugno ? 'Sì' : 'No',
-        data.settembre ? 'Sì' : 'No',
+        data.sab6 ? 'Sì' : 'No',
+        data.dom7 ? 'Sì' : 'No',
+        data.sab20 ? 'Sì' : 'No',
+        data.dom21 ? 'Sì' : 'No',
         data.accompagnatore || 'no',
         data.note || ''
       ]);
@@ -88,7 +90,7 @@ function doPost(e) {
         return jsonResponse({ status: 'error', message: 'Riga non valida' });
       }
       const fields = data.fields; // { Nome: '...', Telefono: '...', ... }
-      const headers = sheet.getRange(1, 1, 1, 7).getValues()[0];
+      const headers = sheet.getRange(1, 1, 1, 9).getValues()[0];
 
       headers.forEach((h, i) => {
         if (h in fields) {

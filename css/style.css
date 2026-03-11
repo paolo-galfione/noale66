@@ -715,6 +715,7 @@ section > .container {
 
 .admin-dashboard {
   padding: 24px 0;
+  max-width: 1200px;
 }
 
 .stats-grid {
@@ -765,17 +766,18 @@ section > .container {
 .admin-table th {
   background-color: rgba(192, 77, 249, 0.25);
   color: var(--color-accent);
-  padding: 12px 14px;
+  padding: 10px 10px;
   text-align: left;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-family: var(--font-display);
+  white-space: nowrap;
 }
 
 .admin-table td {
-  padding: 10px 14px;
+  padding: 8px 10px;
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text);
 }
@@ -916,6 +918,16 @@ section > .container {
   flex: 1;
 }
 
+/* Table wrapper — always scrollable */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-table {
+  min-width: 900px;
+}
+
 /* Responsive table */
 @media (max-width: 600px) {
   .admin-table {
@@ -925,10 +937,5 @@ section > .container {
   .admin-table th,
   .admin-table td {
     padding: 8px 10px;
-  }
-
-  .table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
   }
 }
