@@ -91,15 +91,40 @@ function initFormSubmit() {
       const response = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        redirect: 'follow'
       });
 
-      showMessage(messageEl, 'Grazie! La tua iscrizione è stata registrata. Ci vediamo alla cena!', 'success');
-      form.reset();
+      // Verifica che la risposta HTTP sia ok
+      if (!response.ok) {
+        console.error('Errore HTTP:', response.status, response.statusText);
+        showMessage(messageEl, 'Errore di comunicazione con il server (HTTP ' + response.status + '). Riprova o contattaci su WhatsApp.', 'error');
+        return;
+      }
+
+      // Verifica che la risposta sia leggibile (non opaque)
+      let result;
+      try {
+        result = await response.json();
+      } catch (parseError) {
+        // Se non riesce a leggere il JSON, potrebbe essere una opaque response
+        console.error('Risposta non leggibile dal server:', parseError);
+        showMessage(messageEl, 'Non è stato possibile verificare la registrazione. Contattaci su WhatsApp per confermare.', 'error');
+        return;
+      }
+
+      // Verifica il contenuto della risposta
+      if (result.status === 'ok') {
+        showMessage(messageEl, 'Grazie! La tua iscrizione è stata registrata. Ci vediamo alla cena!', 'success');
+        form.reset();
+      } else {
+        console.error('Errore dal server:', result.message || 'sconosciuto');
+        showMessage(messageEl, 'Si è verificato un errore: ' + (result.message || 'errore sconosciuto') + '. Riprova o contattaci su WhatsApp.', 'error');
+      }
 
     } catch (error) {
-      showMessage(messageEl, 'Si è verificato un errore. Riprova tra qualche istante.', 'error');
       console.error('Errore invio form:', error);
+      showMessage(messageEl, 'Errore di rete. Verifica la connessione e riprova, oppure contattaci su WhatsApp.', 'error');
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Iscriviti alla cena';
