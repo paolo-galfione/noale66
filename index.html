@@ -184,7 +184,7 @@
 
         <!-- Honeypot (campo nascosto anti-bot aggiuntivo) -->
         <div style="position:absolute;left:-9999px;" aria-hidden="true">
-          <input type="text" name="website" tabindex="-1" autocomplete="off">
+          <input type="text" name="fax_number" tabindex="-1" autocomplete="nope">
         </div>
 
         <button type="submit" class="form__submit" id="submitBtn">
@@ -193,6 +193,21 @@
 
         <div class="form__message" id="formMessage"></div>
       </form>
+
+      <!-- Verifica iscrizione -->
+      <div class="verifica-box" style="margin-top:32px; text-align:center; padding:20px; border-top:1px solid rgba(255,255,255,0.1);">
+        <p style="color:var(--color-text-light); margin-bottom:12px; font-size:0.9rem;">
+          Hai già provato a iscriverti ma non sei sicuro che sia andato a buon fine?
+        </p>
+        <button type="button" class="btn btn--outline" id="verificaToggle" style="font-size:0.85rem;">Verifica la tua iscrizione</button>
+        <div id="verificaForm" style="display:none; margin-top:16px;">
+          <div class="form__group" style="max-width:320px; margin:0 auto;">
+            <input class="form__input" type="tel" id="verificaTelefono" placeholder="Il tuo numero di telefono" autocomplete="tel">
+          </div>
+          <button type="button" class="btn btn--primary" id="verificaBtn" style="font-size:0.85rem; margin-top:8px;">Verifica</button>
+          <div class="form__message" id="verificaMessage" style="margin-top:12px;"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -221,6 +236,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

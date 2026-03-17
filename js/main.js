@@ -8,6 +8,7 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKo7h5NdaLIMub
 
 document.addEventListener('DOMContentLoaded', () => {
   initFormSubmit();
+  initVerifica();
   initFadeIn();
   initWhatsAppShare();
 });
@@ -35,7 +36,7 @@ function initFormSubmit() {
     }
 
     // Honeypot check
-    if (form.website && form.website.value) {
+    if (form.fax_number && form.fax_number.value) {
       showMessage(messageEl, 'Grazie! La tua iscrizione è stata registrata.', 'success');
       return;
     }
@@ -128,6 +129,50 @@ function initFormSubmit() {
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Iscriviti alla cena';
+    }
+  });
+}
+
+/* --- Verifica iscrizione --- */
+function initVerifica() {
+  const toggleBtn = document.getElementById('verificaToggle');
+  const verificaForm = document.getElementById('verificaForm');
+  const verificaBtn = document.getElementById('verificaBtn');
+  if (!toggleBtn || !verificaForm || !verificaBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    verificaForm.style.display = verificaForm.style.display === 'none' ? 'block' : 'none';
+  });
+
+  verificaBtn.addEventListener('click', async () => {
+    const messageEl = document.getElementById('verificaMessage');
+    const telefono = document.getElementById('verificaTelefono').value.trim().replace(/[\s\-\.]/g, '');
+
+    messageEl.className = 'form__message';
+    messageEl.textContent = '';
+
+    if (!telefono) {
+      showMessage(messageEl, 'Inserisci il tuo numero di telefono.', 'error');
+      return;
+    }
+
+    verificaBtn.disabled = true;
+    verificaBtn.textContent = 'Verifica in corso...';
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL + '?action=verify&telefono=' + encodeURIComponent(telefono));
+      const result = await response.json();
+
+      if (result.found) {
+        showMessage(messageEl, 'Tutto ok! La tua iscrizione risulta registrata.', 'success');
+      } else {
+        showMessage(messageEl, 'Il tuo numero non risulta tra gli iscritti. Compila il modulo qui sopra per iscriverti!', 'error');
+      }
+    } catch (error) {
+      showMessage(messageEl, 'Errore di connessione. Riprova tra poco.', 'error');
+    } finally {
+      verificaBtn.disabled = false;
+      verificaBtn.textContent = 'Verifica';
     }
   });
 }

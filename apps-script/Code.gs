@@ -112,6 +112,32 @@ function doPost(e) {
  * Richiede il parametro ?password=ADMIN_PASSWORD
  */
 function doGet(e) {
+  // --- Verifica iscrizione pubblica (senza password) ---
+  if (e.parameter.action === 'verify' && e.parameter.telefono) {
+    const telefono = e.parameter.telefono.replace(/[\s\-\.]/g, '');
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(SHEET_NAME);
+    const data = sheet.getDataRange().getValues();
+
+    function normTel(t) {
+      t = String(t).replace(/[\s\-\.]/g, '');
+      return t.replace(/^\+?39/, '');
+    }
+
+    const telNorm = normTel(telefono);
+    let found = false;
+
+    for (let i = 1; i < data.length; i++) {
+      if (normTel(data[i][2]) === telNorm) {
+        found = true;
+        break;
+      }
+    }
+
+    return jsonResponse({ found: found });
+  }
+
+  // --- Dashboard admin (richiede password) ---
   const password = e.parameter.password;
 
   if (password !== ADMIN_PASSWORD) {
