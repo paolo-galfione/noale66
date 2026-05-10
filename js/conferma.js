@@ -44,7 +44,7 @@ async function conferma(risposta) {
     if (result.status === 'ok') {
       const primoNome = (result.nome || '').split(' ')[0] || result.nome;
       const testo = risposta === 'si'
-        ? 'Perfetto ' + primoNome + '! Ti aspettiamo sabato 13 giugno al Parco di Villa Rossi dalle 19:30.'
+        ? 'Perfetto ' + primoNome + '! Ti aspettiamo sabato 13 giugno al Parco di Villa Rossi dalle 18:30.'
         : 'Capito ' + primoNome + ', ci dispiace! Speriamo di rivederti in un\'altra occasione.';
 
       document.getElementById('confermaForm').style.display = 'none';
