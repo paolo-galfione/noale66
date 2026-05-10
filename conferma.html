@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conferma presenza — Classe 1966 Noale</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HERO mini ===== -->
+  <header class="hero" style="padding: 48px 0 40px;">
+    <div class="container">
+      <span class="hero__year">Classe 1966 Noale</span>
+      <h1 class="hero__title" style="font-size:1.8rem;">Conferma la tua presenza</h1>
+      <p class="hero__subtitle">Sabato 13 giugno 2026 &mdash; Parco di Villa Rossi, dalle 19:30</p>
+    </div>
+  </header>
+
+  <hr class="neon-divider">
+
+  <!-- ===== FORM CONFERMA ===== -->
+  <section class="iscrizione" id="confermaSection">
+    <div class="container fade-in">
+      <h2 class="section-title">Ci sei o no?</h2>
+      <p style="text-align:center; margin-bottom:28px; color:var(--color-text-light); max-width:480px; margin-left:auto; margin-right:auto;">
+        Inserisci il numero di telefono con cui ti sei iscritto e dicci se riesci a partecipare sabato 13 giugno.
+      </p>
+
+      <div class="form" id="confermaForm">
+        <div class="form__group">
+          <label class="form__label form__label--required" for="telefono">Il tuo numero di telefono</label>
+          <input class="form__input" type="tel" id="telefono" name="telefono" required autocomplete="tel" placeholder="333 1234567">
+          <span class="form__hint">Lo stesso numero con cui ti sei iscritto</span>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:28px;">
+          <button type="button" class="btn-conferma btn-conferma--si" id="btnSi">
+            Si, ci sono!
+          </button>
+          <button type="button" class="btn-conferma btn-conferma--no" id="btnNo">
+            No, non posso
+          </button>
+        </div>
+
+        <div class="form__message" id="confermaMessage" style="margin-top:20px;"></div>
+      </div>
+
+      <div id="confermaEsito" style="display:none; text-align:center; padding:32px 0;">
+        <p id="esitoTesto" style="font-size:1.1rem; font-weight:700; margin-bottom:16px;"></p>
+        <a href="index.html" class="btn btn--outline" style="font-size:0.9rem;">Torna alla pagina principale</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-divider">
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">
+        Non ti eri ancora iscritto?<br>
+        <a href="index.html">Vai alla pagina principale per iscriverti</a>
+      </p>
+      <p class="footer__copy">&copy; 2026 Classe '66 Noale</p>
+    </div>
+  </footer>
+
+  <script src="js/conferma.js"></script>
+</body>
+</html>

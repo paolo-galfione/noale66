@@ -29,18 +29,19 @@ function setup() {
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
   }
-  sheet.getRange(1, 1, 1, 9).setValues([[
+  sheet.getRange(1, 1, 1, 10).setValues([[
     'Timestamp', 'Nome', 'Telefono', 'SAB-6',
-    'DOM-7', 'SAB-20', 'DOM-21', 'Accompagnatore', 'Note'
+    'DOM-7', 'SAB-20', 'DOM-21', 'Accompagnatore', 'Note', 'Conferma13giugno'
   ]]);
   sheet.setFrozenRows(1);
-  sheet.getRange(1, 1, 1, 9).setFontWeight('bold');
+  sheet.getRange(1, 1, 1, 10).setFontWeight('bold');
 }
 
 /**
  * Gestisce le richieste POST.
  * Azioni supportate:
  * - action: "register" (default) — nuova iscrizione
+ * - action: "confirm" — conferma/disdetta per SAB 13 (pubblica, senza password)
  * - action: "delete" — elimina riga (richiede password + row)
  * - action: "update" — modifica riga (richiede password + row + fields)
  */
@@ -58,14 +59,51 @@ function doPost(e) {
         new Date().toLocaleString('it-IT'),
         data.nome || '',
         data.telefono || '',
-        data.sab6 ? 'Sì' : 'No',
-        data.dom7 ? 'Sì' : 'No',
-        data.sab20 ? 'Sì' : 'No',
-        data.dom21 ? 'Sì' : 'No',
+        'N/A',
+        'N/A',
+        'N/A',
+        'N/A',
         data.accompagnatore || 'no',
-        data.note || ''
+        data.note || '',
+        'Si'
       ]);
       return jsonResponse({ status: 'ok' });
+    }
+
+    // --- Conferma presenza SAB 13 (pubblica, senza password) ---
+    if (action === 'confirm') {
+      const telefono = (data.telefono || '').replace(/[\s\-\.]/g, '');
+      const risposta = data.risposta; // 'si' o 'no'
+
+      if (!telefono || (risposta !== 'si' && risposta !== 'no')) {
+        return jsonResponse({ status: 'error', message: 'Dati mancanti' });
+      }
+
+      const sheetData = sheet.getDataRange().getValues();
+
+      function normTel(t) {
+        t = String(t).replace(/[\s\-\.]/g, '');
+        return t.replace(/^\+?39/, '');
+      }
+
+      const telNorm = normTel(telefono);
+      let found = false;
+      let nome = '';
+
+      for (let i = 1; i < sheetData.length; i++) {
+        if (normTel(sheetData[i][2]) === telNorm) {
+          const confermaValue = risposta === 'si' ? 'Si' : 'No';
+          sheet.getRange(i + 1, 10).setValue(confermaValue);
+          found = true;
+          nome = sheetData[i][1];
+          break;
+        }
+      }
+
+      if (!found) {
+        return jsonResponse({ status: 'error', message: 'Numero non trovato tra gli iscritti' });
+      }
+      return jsonResponse({ status: 'ok', nome: nome });
     }
 
     // --- Azioni admin (richiedono password) ---
@@ -75,7 +113,7 @@ function doPost(e) {
 
     // --- Elimina riga ---
     if (action === 'delete') {
-      const row = data.row; // numero riga nel foglio (1-based, intestazione = riga 1)
+      const row = data.row;
       if (!row || row < 2) {
         return jsonResponse({ status: 'error', message: 'Riga non valida' });
       }
@@ -89,8 +127,8 @@ function doPost(e) {
       if (!row || row < 2) {
         return jsonResponse({ status: 'error', message: 'Riga non valida' });
       }
-      const fields = data.fields; // { Nome: '...', Telefono: '...', ... }
-      const headers = sheet.getRange(1, 1, 1, 9).getValues()[0];
+      const fields = data.fields;
+      const headers = sheet.getRange(1, 1, 1, 10).getValues()[0];
 
       headers.forEach((h, i) => {
         if (h in fields) {
@@ -151,7 +189,7 @@ function doGet(e) {
 
     const headers = data[0];
     const rows = data.slice(1).map((row, index) => {
-      const obj = { _row: index + 2 }; // numero riga nel foglio (1-based)
+      const obj = { _row: index + 2 };
       headers.forEach((h, i) => {
         obj[h] = row[i];
       });

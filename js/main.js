@@ -62,24 +62,10 @@ function initFormSubmit() {
       return;
     }
 
-    // Date selezionate (checkbox, possono essere multiple)
-    const checkSab6 = form.querySelector('input[name="data"][value="SAB-6"]').checked;
-    const checkDom7 = form.querySelector('input[name="data"][value="DOM-7"]').checked;
-    const checkSab20 = form.querySelector('input[name="data"][value="SAB-20"]').checked;
-    const checkDom21 = form.querySelector('input[name="data"][value="DOM-21"]').checked;
-    if (!checkSab6 && !checkDom7 && !checkSab20 && !checkDom21) {
-      showMessage(messageEl, 'Seleziona almeno una data in cui saresti disponibile.', 'error');
-      return;
-    }
-
     // Raccogli dati
     const data = {
       nome: nome,
       telefono: form.telefono.value.trim(),
-      sab6: checkSab6,
-      dom7: checkDom7,
-      sab20: checkSab20,
-      dom21: checkDom21,
       accompagnatore: form.querySelector('input[name="accompagnatore"]:checked')?.value || 'no',
       note: form.note.value.trim()
     };

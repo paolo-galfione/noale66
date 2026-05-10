@@ -41,22 +41,30 @@
         <div class="stat-card__number" id="statAccompagnatori">-</div>
         <div class="stat-card__label">Gradirebbero accomp.</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__number" id="statSab6">-</div>
-        <div class="stat-card__label">SAB 6 giugno</div>
+      <div class="stat-card" style="border-color: var(--color-success);">
+        <div class="stat-card__number" id="statConfermaSi" style="color: var(--color-success); text-shadow: 0 0 10px rgba(0,255,136,0.4);">-</div>
+        <div class="stat-card__label">Confermano SAB 13</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__number" id="statDom7">-</div>
-        <div class="stat-card__label">DOM 7 giugno</div>
+      <div class="stat-card" style="border-color: var(--color-error);">
+        <div class="stat-card__number" id="statConfermaNo" style="color: var(--color-error); text-shadow: 0 0 10px rgba(255,63,63,0.4);">-</div>
+        <div class="stat-card__label">Non possono venire</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__number" id="statSab20">-</div>
-        <div class="stat-card__label">SAB 20 giugno</div>
+      <div class="stat-card" style="border-color: var(--color-gold);">
+        <div class="stat-card__number" id="statConfermaAttesa" style="color: var(--color-gold); text-shadow: 0 0 10px rgba(255,215,0,0.4);">-</div>
+        <div class="stat-card__label">Non hanno risposto</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__number" id="statDom21">-</div>
-        <div class="stat-card__label">DOM 21 giugno</div>
-      </div>
+    </div>
+
+    <!-- Pannello messaggio WhatsApp -->
+    <div class="whatsapp-generator">
+      <h3 class="section-title" style="font-size:0.9rem; margin-bottom:12px;">Messaggio WhatsApp per gli iscritti</h3>
+      <p style="font-size:0.85rem; color:var(--color-text-light); margin-bottom:12px;">
+        Nella tabella trovi l'icona WhatsApp accanto ad ogni numero: aprira' una chat con il messaggio gia' personalizzato col nome della persona.
+        Oppure copia il testo generico qui sotto per inviarlo alla tua lista broadcast.
+      </p>
+      <textarea class="form__textarea" id="whatsappMsgGenerico" rows="6" readonly style="font-size:0.85rem; margin-bottom:8px;"></textarea>
+      <button class="btn btn--outline" id="copyMsgBtn" style="font-size:0.85rem;">Copia messaggio</button>
+      <div class="form__message" id="copyMsgFeedback" style="margin-top:8px;"></div>
     </div>
 
     <!-- Toolbar -->
@@ -77,17 +85,14 @@
             <th>Data iscrizione</th>
             <th>Nome</th>
             <th>Telefono</th>
-            <th>SAB-6</th>
-            <th>DOM-7</th>
-            <th>SAB-20</th>
-            <th>DOM-21</th>
             <th>Accomp.</th>
+            <th>Conferma 13/6</th>
             <th>Note</th>
             <th>Azioni</th>
           </tr>
         </thead>
         <tbody id="tableBody">
-          <tr><td colspan="11" style="text-align:center; padding:24px;">Caricamento...</td></tr>
+          <tr><td colspan="8" style="text-align:center; padding:24px;">Caricamento...</td></tr>
         </tbody>
       </table>
     </div>
