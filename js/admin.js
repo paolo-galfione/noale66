@@ -6,12 +6,12 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKo7h5NdaLIMub
 const WA_MSG_TEMPLATE = `Ciao [NOME], sono Paolo Galfione!
 Ti ricordi che ti eri iscritto alla cena della classe '66 di Noale?
 Purtroppo dobbiamo spostare la data: da sabato 6 giugno (la piu' votata) a sabato 13 giugno, sempre al Parco di Villa Rossi a Noale, dalle 19:30.
-Facci sapere se riesci a venire lo stesso: noale66.it/conferma`;
+Facci sapere se riesci a venire lo stesso: noale66.it/conferma.html`;
 
 const WA_MSG_GENERICO = `Ciao, sono Paolo Galfione!
 Ti ricordi che ti eri iscritto alla cena della classe '66 di Noale?
 Purtroppo dobbiamo spostare la data: da sabato 6 giugno (la piu' votata) a sabato 13 giugno, sempre al Parco di Villa Rossi a Noale, dalle 19:30.
-Facci sapere se riesci a venire lo stesso: noale66.it/conferma`;
+Facci sapere se riesci a venire lo stesso: noale66.it/conferma.html`;
 
 let currentData = [];
 
