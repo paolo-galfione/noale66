@@ -520,6 +520,94 @@ section > .container {
 }
 
 /* ======================
+   PROGRAMMA
+   ====================== */
+.programma {
+  position: relative;
+  padding: 64px 0;
+  background: var(--color-bg);
+}
+
+.programma__lista {
+  list-style: none;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.programma__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.programma__item:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--glow-cyan);
+}
+
+.programma__item-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.programma__item-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.programma__item-desc {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.programma__musica {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(255, 16, 240, 0.07);
+  border: 1px solid rgba(255, 16, 240, 0.35);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  box-shadow: var(--glow-pink);
+}
+
+.programma__musica-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.programma__musica-text {
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.programma__musica-artista {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+  text-shadow: var(--glow-pink);
+}
+
+/* ======================
    FOOTER / WhatsApp
    ====================== */
 .footer {
@@ -938,4 +1026,115 @@ section > .container {
   .admin-table td {
     padding: 8px 10px;
   }
+}
+
+/* --- Banner avviso cambio data --- */
+.banner-avviso {
+  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-purple));
+  color: #fff;
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(255, 16, 240, 0.4);
+}
+
+.banner-avviso__link {
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.banner-avviso__link:hover {
+  color: #fff;
+  text-shadow: var(--glow-cyan);
+}
+
+/* --- Data statica nel form iscrizione --- */
+.form__info-box {
+  padding: 14px;
+  background: rgba(0, 255, 255, 0.06);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: var(--glow-cyan);
+}
+
+.form__info-box small {
+  color: var(--color-text-light);
+}
+
+/* --- Pannello WhatsApp admin --- */
+.whatsapp-generator {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+/* --- Bottoni conferma presenza (conferma.html) --- */
+.btn-conferma {
+  flex: 1;
+  padding: 16px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.btn-conferma:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-conferma--si {
+  background: linear-gradient(90deg, #00b359, var(--color-success));
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.btn-conferma--si:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-conferma--no {
+  background: transparent;
+  border: 2px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.btn-conferma--no:hover:not(:disabled) {
+  background: rgba(255, 63, 63, 0.1);
+  box-shadow: 0 0 15px rgba(255, 63, 63, 0.3);
+  transform: translateY(-2px);
+}
+
+/* --- Link WhatsApp inline nella tabella --- */
+.wa-link {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 1rem;
+  vertical-align: middle;
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.wa-link:hover {
+  opacity: 1;
+  text-shadow: none;
 }

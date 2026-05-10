@@ -21,6 +21,16 @@
 </head>
 <body>
 
+  <!-- ===== AVVISO CAMBIO DATA ===== -->
+  <div class="banner-avviso">
+    <div class="container">
+      <strong>Avviso importante:</strong>
+      La data della cena e' stata spostata a <strong>sabato 13 giugno 2026</strong>.
+      Sei gia' iscritto?
+      <a href="conferma" class="banner-avviso__link">Conferma la tua presenza &rarr;</a>
+    </div>
+  </div>
+
   <!-- ===== HERO ===== -->
   <header class="hero">
     <div class="container">
@@ -83,9 +93,8 @@
           </div>
           <div class="dettagli__card-label">Quando</div>
           <div class="dettagli__card-value">
-            Sabato 6 o Domenica 7 giugno<br>
-            Sabato 20 o Domenica 21 giugno 2026<br>
-            <small>(da decidere insieme!)</small>
+            <strong>Sabato 13 giugno 2026</strong><br>
+            <small>dalle 18:30</small>
           </div>
         </div>
         <div class="dettagli__card">
@@ -99,6 +108,53 @@
             <small>Aperitivo + Cena + Musica</small>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-divider">
+
+  <!-- ===== PROGRAMMA ===== -->
+  <section class="programma" id="programma">
+    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&q=80');"></div>
+    <div class="container fade-in">
+      <h2 class="section-title">Il programma della serata</h2>
+      <p style="text-align:center; color:var(--color-text-light); margin-bottom:40px;">Una serata tutta da vivere, in movimento, tra buon cibo e grande musica</p>
+
+      <ul class="programma__lista">
+        <li class="programma__item">
+          <span class="programma__item-icon">🥂</span>
+          <div>
+            <strong class="programma__item-title">Aperitivo di benvenuto</strong>
+            <span class="programma__item-desc">Prosecco, Spritz Aperol &amp; Campari</span>
+          </div>
+        </li>
+        <li class="programma__item">
+          <span class="programma__item-icon">🍽️</span>
+          <div>
+            <strong class="programma__item-title">Gran buffet in stile cicchetti</strong>
+            <span class="programma__item-desc">Mozzarelle, porchetta, cubetti di mortadella, tramezzini, pasta fredda e pizze a spicchi — piattino alla mano, a spasso tra i tavoli</span>
+          </div>
+        </li>
+        <li class="programma__item">
+          <span class="programma__item-icon">🍦</span>
+          <div>
+            <strong class="programma__item-title">Gelato &amp; torta</strong>
+            <span class="programma__item-desc">Un dolce finale da leccarsi i baffi</span>
+          </div>
+        </li>
+        <li class="programma__item">
+          <span class="programma__item-icon">🍹</span>
+          <div>
+            <strong class="programma__item-title">Cocktail &amp; open bar</strong>
+            <span class="programma__item-desc">Drink, balli e ciaccole fino a quando la nostra giovane età lo permetterà</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="programma__musica">
+        <div class="programma__musica-icon">🎤</div>
+        <p class="programma__musica-text">La serata sarà allietata con <strong>musica live</strong> da<br><span class="programma__musica-artista">Michela Parolin e il suo gruppo</span></p>
       </div>
     </div>
   </section>
@@ -129,27 +185,12 @@
           <span class="form__hint">Per eventuali comunicazioni sull'evento</span>
         </div>
 
-        <!-- Preferenza data (selezione multipla) -->
+        <!-- Data evento (fissa) -->
         <div class="form__group">
-          <label class="form__label form__label--required">In quali date saresti disponibile?</label>
-          <span class="form__hint" style="margin-bottom:8px; display:block;">⚡ Più date selezioni, più è facile organizzare! Spunta tutte quelle in cui saresti disponibile, non solo la preferita.</span>
-          <div class="form__radio-group">
-            <label class="form__radio-label">
-              <input type="checkbox" name="data" value="SAB-6">
-              SAB 6 giugno
-            </label>
-            <label class="form__radio-label">
-              <input type="checkbox" name="data" value="DOM-7">
-              DOM 7 giugno
-            </label>
-            <label class="form__radio-label">
-              <input type="checkbox" name="data" value="SAB-20">
-              SAB 20 giugno
-            </label>
-            <label class="form__radio-label">
-              <input type="checkbox" name="data" value="DOM-21">
-              DOM 21 giugno
-            </label>
+          <label class="form__label">Data dell'evento</label>
+          <div class="form__info-box">
+            <strong>Sabato 13 giugno 2026</strong> &mdash; dalle 18:30<br>
+            <small>Parco di Villa Rossi, Via Bregolini 82, Noale (VE)</small>
           </div>
         </div>
 
@@ -236,6 +277,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>
